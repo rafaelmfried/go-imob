@@ -1,0 +1,25 @@
+###
+POST http://localhost:8000/users
+Content-Type: application/json
+
+{
+    "name": "Rafael Friederick",
+    "email": "rafael@example.com"
+}
+
+### Get User
+GET http://localhost:8000/users?email=rafael@example.com
+
+
+### Create Property
+POST http://localhost:8000/properties
+Content-Type: application/json
+
+{
+    "title": "Luxury Apartment",
+    "owner_id": "019a0c8e-d27d-743b-991e-41fa5c06d9ce",
+    "address": "124 Main St, Cityville"
+}
+
+### Get Property
+GET http://localhost:8000/properties/019a0c8e-d27d-743b-991e-41fa5c06d9ce
