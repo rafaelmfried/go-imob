@@ -20,7 +20,7 @@ func NewPropertyHandler(uc services.PropertyService, log logger.Logger) *Propert
 
 func (h *PropertyHandler) Register(r *gin.Engine) {
 	r.POST("/properties", h.CreateProperty)
-	r.GET("/properties/:id", h.GetProperty)
+	r.GET("/properties", h.GetProperty)
 }
 
 func (h *PropertyHandler) CreateProperty(c *gin.Context) {
@@ -39,9 +39,9 @@ func (h *PropertyHandler) CreateProperty(c *gin.Context) {
 }
 
 func (h *PropertyHandler) GetProperty(c *gin.Context) {
-	id := c.Param("id")
+	owner_id := c.Query("owner_id")
 	ctx := c.Request.Context()
-	u, err := h.uc.Get(ctx, id)
+	u, err := h.uc.Get(ctx, owner_id)
 	if err != nil {
 		c.JSON(http.StatusNotFound, gin.H{"error": "not found"})
 		return

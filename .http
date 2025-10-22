@@ -1,25 +1,31 @@
+# globais
+@base_url=http://localhost:8000
+@content_type=application/json
+
 ### Create User
-POST http://localhost:8000/users
+# @name CreateUser
+POST {{base_url}}/users
 Content-Type: application/json
 
 {
-    "name": "Rafael Friederick",
-    "email": "rafael@example.com"
+    "name": "Matheus Friederick",
+    "email": "matheus@example.com"
 }
 
 ### Get User
-GET http://localhost:8000/users?email=rafael@example.com
+GET {{base_url}}/users?email={{CreateUser.response.body.$.email}}
 
 
 ### Create Property
-POST http://localhost:8000/properties
+# @name CreateProperty
+POST {{base_url}}/properties
 Content-Type: application/json
 
 {
     "title": "Luxury Apartment",
-    "owner_id": "019a0c8e-d27d-743b-991e-41fa5c06d9ce",
-    "address": "124 Main St, Cityville"
+    "address": "124 Main St, Cityville",
+    "owner_id": "{{CreateUser.response.body.$.id}}"
 }
 
-### Get Property
-GET http://localhost:8000/properties/019a0c8e-d27d-743b-991e-41fa5c06d9ce
+### Get Property By Owner ID
+GET {{base_url}}/properties?owner_id={{CreateUser.response.body.$.id}}
